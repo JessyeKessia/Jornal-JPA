@@ -69,7 +69,7 @@ public class Noticia {
 		return assuntos;
 	}
 
-	public void adiconarComentario(String comentario) {
+	public void adicionarComentario(String comentario) {
 		this.comentarios.add(comentario);
 	}
 
