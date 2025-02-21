@@ -27,13 +27,11 @@ public class Consultar {
 			manager = Util.conectarBanco();
 			
 			TypedQuery<Noticia> query1;
-			TypedQuery<Assunto> query2;
 			List<Noticia> noticias;
-			List<Assunto> assuntos;
 			String jpql;
 			
 			
-			System.out.println("----- Listar noticias com base na data X -----");
+			System.out.println("----- Listar noticias com base na data 2025-02-19 -----");
 			jpql = "select n from Noticia n where n.data = '2025-02-19'";
 			query1 = manager.createQuery(jpql, Noticia.class);
 			noticias = query1.getResultList();
@@ -41,19 +39,19 @@ public class Consultar {
 			System.out.println(n);
 			
 			
-			System.out.println("----- Listar noticias com base em um assunto de nome N -----");
+			System.out.println("\n----- Listar noticias com base em um assunto de nome N = Economia -----");
 			jpql = "select n from Noticia n join n.assuntos a where a.nome = 'Economia'";
 			query1 = manager.createQuery(jpql, Noticia.class);
 			noticias = query1.getResultList();
 			for (Noticia n : noticias)
 			    System.out.println(n);
 			
-			System.out.println("----- Listar noticias com base na quantidade N de comentários -----");
+			System.out.println("\n----- Listar noticias com base na quantidade N > 3 de comentários -----");
 			jpql = "SELECT n FROM Noticia n";
 			query1 = manager.createQuery(jpql, Noticia.class);
 			noticias = query1.getResultList();
 
-			int quantidadeComentarios = 1; 
+			int quantidadeComentarios = 3; 
 			
 			List<Noticia> noticiasFiltradas = noticias.stream()
 			    .filter(n -> n.getComentarios().size() > quantidadeComentarios)
