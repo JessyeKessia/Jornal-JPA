@@ -14,8 +14,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import modelo.Assunto;
 import modelo.Noticia;
-import regras_negocio.Fachada;
-
 
 
 public class Consultar {
