@@ -21,6 +21,7 @@ public class Noticia {
 	
 	@ManyToMany(mappedBy="noticias", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private List<Assunto> assuntos = new ArrayList<Assunto>();
+	@ElementCollection
 	private List<String> comentarios = new ArrayList<String>();
 	
 	public Noticia () {}
