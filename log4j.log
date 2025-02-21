@@ -1,27 +1,38 @@
-21:55:25,484 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-21:55:25,773  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-21:55:25,904  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
-21:55:25,980 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-21:55:25,982  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-21:55:26,438  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
-21:55:26,447  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-21:55:26,448  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
-21:55:26,448  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
-21:55:26,449  INFO pooling:171 - HHH10001003: Autocommit mode: false
-21:55:26,454  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
-21:55:29,977  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-21:55:30,019  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@724bf25f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-21:55:30,973 DEBUG Util:21 - -------- conectou banco
-21:55:31,714 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.data='2025-02-19'
-21:55:31,796 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:55:31,798 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
-21:55:31,809 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:55:31,810 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
-21:55:31,818 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:55:31,821 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
-21:55:31,825 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:55:31,826 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
-21:55:31,868 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 join Assunto_Noticia a1_0 on n1_0.id=a1_0.noticias_id join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_1.nome='Economia'
-21:55:31,879 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
-21:55:31,891  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
-21:55:31,894 DEBUG Util:31 - -------- desconectou banco
+10:01:55,219 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+10:01:55,397  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+10:01:55,487  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+10:01:55,543 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+10:01:55,544  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+10:01:55,892  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
+10:01:55,898  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+10:01:55,899  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
+10:01:55,899  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
+10:01:55,900  INFO pooling:171 - HHH10001003: Autocommit mode: false
+10:01:55,904  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
+10:01:58,116  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:01:58,150  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6b37df8e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+10:01:58,323 DEBUG Util:21 - -------- conectou banco
+10:01:58,905 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
+10:01:58,977 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+10:01:58,978 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
+10:01:58,985 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+10:01:58,985 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
+10:01:58,988 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+10:01:58,989 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
+10:01:58,991 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+10:01:58,992 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
+10:01:58,996 DEBUG SQL:135 - select a1_0.id,a1_0.nome from Assunto a1_0
+10:01:58,998 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:58,998 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
+10:01:59,001 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:59,001 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
+10:01:59,003 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:59,003 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
+10:01:59,006 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:59,006 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
+10:01:59,009 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:59,010 TRACE bind:24 - binding parameter (1:INTEGER) <- [5]
+10:01:59,012 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
+10:01:59,012 TRACE bind:24 - binding parameter (1:INTEGER) <- [6]
+10:01:59,018  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
+10:01:59,020 DEBUG Util:31 - -------- desconectou banco
