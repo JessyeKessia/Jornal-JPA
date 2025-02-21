@@ -1,97 +1,95 @@
+/**********************************
+ * IFPB - Curso Superior de Tec. em Sist. para Internet
+ * Prof. Fausto Maranhão Ayres
+ **********************************/
+ 
 package appconsole;
 
-/**********************************
- * IFPB - SI
- * Persistencia de Objetos
- * Prof. Fausto Ayres
- **********************************/
-
-import java.util.List;
-import java.util.Scanner;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
+import modelo.Assunto;
 import modelo.Noticia;
 
+public class Cadastrar {
+    private EntityManager manager;
 
-
-public class Consultar {
-
-    protected EntityManager manager;
-
-    public Consultar(String data, String assuntoNome, int quantidadeComentarios) {
-
-
-
+    public Cadastrar() {
         try {
             manager = Util.conectarBanco();
-            TypedQuery<Noticia> query1;
-            List<Noticia> noticias;
-            String jpql;
 
+            System.out.println("Cadastrando...");
 
+            // Criando assuntos
+            Assunto brasil = new Assunto("Brasil");
+            Assunto tecnologia = new Assunto("Tecnologia");
+            Assunto politica = new Assunto("Política");
+            Assunto esporte = new Assunto("Esporte");
+            Assunto economia = new Assunto("Economia");
+            Assunto saude = new Assunto("Saude");
+            Assunto entreterimento = new Assunto("Entreterimento");
 
-            // Listar noticias com base na data passada
-            System.out.println("----- Listar noticias com base na data " + data + " -----");
-            jpql = "select n from Noticia n where n.data = :data";
-            query1 = manager.createQuery(jpql, Noticia.class);
-            query1.setParameter("data", data);
-            noticias = query1.getResultList();
+            manager.getTransaction().begin();
+            manager.persist(brasil);
+            manager.persist(tecnologia);
+            manager.persist(politica);
+            manager.persist(esporte);
+            manager.persist(saude);
+            manager.persist(economia);
+            
+            manager.getTransaction().commit();
 
-            for (Noticia n : noticias) {
-                System.out.println(n);
-            }
+            // Criando notícias e associando aos assuntos
+            manager.getTransaction().begin();
+            Noticia noticia1 = new Noticia("Nova IA revoluciona mercado", "2025-02-19", "https://technews.com/ia");
+            noticia1.adicionar(tecnologia);
+            tecnologia.adicionar(noticia1);
+            brasil.adicionar(noticia1);
+            noticia1.adicionarComentario("Muito interessante essa IA!");
+            noticia1.adicionarComentario("A tecnologia está avançando muito rápido.");
+            noticia1.adicionarComentario("kkkk já já elas se revoltam e aí eu quero ver");
+            noticia1.adicionarComentario("Tenho medo de perder meu emprego para uma IA...");
+            manager.persist(noticia1);
+            manager.getTransaction().commit();
 
-            // Listar noticias com base no nome do assunto passado
+            manager.getTransaction().begin();
+            Noticia noticia2 = new Noticia("Eleições e os novos desafios", "2025-02-19", "https://news.com/politica");
+            noticia2.adicionar(politica);
+            politica.adicionar(noticia2);
+            brasil.adicionar(noticia2);
+            noticia2.adicionarComentario("Será uma eleição difícil!");
+            noticia2.adicionarComentario("A política está cada vez mais polarizada.");
+            noticia2.adicionarComentario("Esse careca acha que é o dono do Brasil.");
+            manager.persist(noticia2);
+            manager.getTransaction().commit();
 
-            System.out.println("\n----- Listar noticias com base em um assunto de nome " + assuntoNome + " -----");
-            jpql = "select n from Noticia n join n.assuntos a where a.nome = :assuntoNome";
-            query1 = manager.createQuery(jpql, Noticia.class);
-            query1.setParameter("assuntoNome", assuntoNome);
-            noticias = query1.getResultList();
+            manager.getTransaction().begin();
+            Noticia noticia3 = new Noticia("Final do campeonato emocionante", "2025-02-19", "https://sports.com/final");
+            noticia3.adicionar(esporte);
+            esporte.adicionar(noticia3);
+            brasil.adicionar(noticia3);
+            saude.adicionar(noticia3);
+            entreterimento.adicionar(noticia3);
+            noticia3.adicionarComentario("Que final! Incrível!");
+            noticia3.adicionarComentario("Espero que o próximo campeonato seja ainda melhor.");
+            manager.persist(noticia3);
+            manager.getTransaction().commit();
 
-            for (Noticia n : noticias) {
-                System.out.println(n);
-            }
-
-
-
-            // Listar noticias com base na quantidade de comentários maior que o valor passado
-            System.out.println("\n----- Listar noticias com base na quantidade de comentários maior que " + quantidadeComentarios + " -----");
-            jpql = "SELECT n FROM Noticia n where size(n.comentarios)> :quantidadeComentarios";
-            query1 = manager.createQuery(jpql, Noticia.class);
-            query1.setParameter("quantidadeComentarios", quantidadeComentarios);
-            noticias = query1.getResultList();
-
-            for (Noticia n : noticias) {
-                System.out.println(n);
-            }
-
-
+            manager.getTransaction().begin();
+            Noticia noticia4 = new Noticia("Stock exchange in the USA", "2025-02-19", "https://economy.com/");
+            noticia4.adicionar(economia);
+            economia.adicionar(noticia4);
+            noticia4.adicionarComentario("Great opportunity!");
+            noticia4.adicionarComentario("Stock market on the rise! Investors are optimistic as markets show strong performance this week.");
+            manager.persist(noticia4);
+            manager.getTransaction().commit();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exceção=" + e.getMessage());
         }
-
         Util.fecharBanco();
-        System.out.println("\nfim da aplicacao");
-
+        System.out.println("Fim da aplicação");
     }
 
-    //=================================================
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Digite a data (formato AAAA-MM-DD): ");
-        String data = scanner.nextLine();
-        System.out.print("Digite o nome do assunto: ");
-        String assuntoNome = scanner.nextLine();
-        System.out.print("Digite a quantidade mínima de comentários: ");
-        int quantidadeComentarios = scanner.nextInt();
-
-        scanner.close();
-        new Consultar(data, assuntoNome, quantidadeComentarios);
-
+        new Cadastrar();
     }
-
 }
