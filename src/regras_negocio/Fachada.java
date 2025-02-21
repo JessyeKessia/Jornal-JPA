@@ -86,7 +86,7 @@ public class Fachada {
 			DAO.rollback();
 			throw new Exception("adicionar comentario - nome da nótica não encontrado: " + titulo);
 		}
-		n.adiconarComentario(comentario);
+		n.adicionarComentario(comentario);
 		daonoticia.update(n);
 		DAO.commit();
 	}

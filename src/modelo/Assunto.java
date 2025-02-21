@@ -25,7 +25,7 @@ public class Assunto {
 	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE})
 	private List<Noticia> noticias = new ArrayList<Noticia>();
 
-
+	public Assunto () {}
 	public Assunto (String nome){
 		//this.id = ???;
 		this.nome = nome;

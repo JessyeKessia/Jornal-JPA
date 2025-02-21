@@ -24,13 +24,17 @@ public class Cadastrar {
             Assunto politica = new Assunto("Política");
             Assunto esporte = new Assunto("Esporte");
             Assunto economia = new Assunto("Economia");
+            Assunto saude = new Assunto("Saude");
+            Assunto entreterimento = new Assunto("Entreterimento");
 
             manager.getTransaction().begin();
             manager.persist(brasil);
             manager.persist(tecnologia);
             manager.persist(politica);
             manager.persist(esporte);
+            manager.persist(saude);
             manager.persist(economia);
+            
             manager.getTransaction().commit();
 
             // Criando notícias e associando aos assuntos
@@ -41,6 +45,8 @@ public class Cadastrar {
             brasil.adicionar(noticia1);
             noticia1.adicionarComentario("Muito interessante essa IA!");
             noticia1.adicionarComentario("A tecnologia está avançando muito rápido.");
+            noticia1.adicionarComentario("kkkk já já elas se revoltam e aí eu quero ver");
+            noticia1.adicionarComentario("Tenho medo de perder meu emprego para uma IA...");
             manager.persist(noticia1);
             manager.getTransaction().commit();
 
@@ -51,6 +57,7 @@ public class Cadastrar {
             brasil.adicionar(noticia2);
             noticia2.adicionarComentario("Será uma eleição difícil!");
             noticia2.adicionarComentario("A política está cada vez mais polarizada.");
+            noticia2.adicionarComentario("Esse careca acha que é o dono do Brasil.");
             manager.persist(noticia2);
             manager.getTransaction().commit();
 
@@ -59,6 +66,8 @@ public class Cadastrar {
             noticia3.adicionar(esporte);
             esporte.adicionar(noticia3);
             brasil.adicionar(noticia3);
+            saude.adicionar(noticia3);
+            entreterimento.adicionar(noticia3);
             noticia3.adicionarComentario("Que final! Incrível!");
             noticia3.adicionarComentario("Espero que o próximo campeonato seja ainda melhor.");
             manager.persist(noticia3);

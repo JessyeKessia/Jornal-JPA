@@ -13,7 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.db4o.ObjectContainer;
-import com.db4o.query.Query;
+
+import jakarta.persistence.Query;
 
 public abstract class DAO<T> implements DAOInterface<T> {
 	protected static ObjectContainer manager;
