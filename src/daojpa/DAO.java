@@ -6,18 +6,14 @@
 
 package daojpa;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import com.db4o.ObjectContainer;
-
-import jakarta.persistence.Query;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 public abstract class DAO<T> implements DAOInterface<T> {
-	protected static ObjectContainer manager;
+	protected static EntityManager manager;
 
 	public static void open() {
 		manager = Util.conectarBanco(); // banco local
@@ -25,103 +21,51 @@ public abstract class DAO<T> implements DAOInterface<T> {
 	}
 
 	public static void close() {
-		Util.desconectar();
+		Util.fecharBanco();
+		manager = null;
 	}
 
 	// ----------CRUD-----------------------
 
 	public void create(T obj) {
-		manager.store(obj);
+		manager.persist(obj);
 	}
 
 	public T update(T obj) {
-		manager.store(obj);
-		return obj;
+		return manager.merge(obj);
+		
 	}
 
 	public void delete(T obj) {
-		manager.delete(obj);
+		manager.remove(obj);
 	}
-
-	public void refresh(T obj) {
-		manager.ext().refresh(obj, Integer.MAX_VALUE);
-	}
-
+	
+	public abstract T read(Object chave);
+	
 	@SuppressWarnings("unchecked")
-	public List<T> readAll() {
-		manager.ext().purge(); // limpar cache do manager
+	public List<T> readAll(){
+		Class<T> type = (Class<T>) ((ParameterizedType) this.getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
 
-		Class<T> type = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-				.getActualTypeArguments()[0];
-		Query q = manager.query();
-		q.constrain(type);
-		return (List<T>) q.execute();
+		TypedQuery<T> query = manager.createQuery("select x from " + type.getSimpleName() + " x",type);
+		return  query.getResultList();
 	}
 
 	// --------transa��o---------------
 	public static void begin() {
-	} // tem que ser vazio
+		if(!manager.getTransaction().isActive()) {
+			manager.getTransaction().begin();
+		}
+	}
 
 	public static void commit() {
-		manager.commit();
-		manager.ext().purge();
+		if(manager.getTransaction().isActive())
+			manager.getTransaction().commit();
 	}
 
 	public static void rollback() {
-		manager.rollback();
+		manager.getTransaction().rollback();
 	}
 
-	/**
-	 * gerar novo id para o tipo T, baseando-se no maior valor do id
-	 * 
-	 */
-	public <X> int gerarId(Class<X> classe) {
-		
-		// verificar se o banco esta vazio
-		if (manager.query(classe).isEmpty()) {
-			return 1; 	// primeiro id da classe
-		} 
-		else {
-			// obter o maior id da classe
-			Query q = manager.query();
-			q.constrain(classe);
-			q.descend("id").orderDescending();
-			List<X> resultados = q.execute();
-			if (resultados.isEmpty())
-				return 1; // retorna primeiro id
-			else
-				try {
-					// obter objeto com maior id
-					X objeto = resultados.getFirst();
-					//localizar atributo id dentro do objeto
-					int id = 0;
-					for (Field f : getAllFieldsList(classe)) {
-						if (f.getName().equals("id")) {
-							f.setAccessible(true);		//atributo private
-							id = (Integer)f.get(objeto);
-						}
-					}
-					if (id == 0)
-						throw new NoSuchFieldException();
-					
-					return id+1;
-				} catch (NoSuchFieldException e) {
-					throw new RuntimeException("classe " + classe + " - nao tem atributo id");
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException("classe " + classe + " - atributo id inacessivel");
-				}
-		}
-	}
-
-	public static <X> List<Field> getAllFieldsList(final Class<X> cls) {
-		// retorna uma lista com todos os campos do objeto
-		final List<Field> allFields = new ArrayList<Field>();
-		Class<?> currentClass = cls;
-		while (currentClass != null) {
-			final Field[] declaredFields = currentClass.getDeclaredFields();
-			Collections.addAll(allFields, declaredFields);
-			currentClass = currentClass.getSuperclass();
-		}
-		return allFields;
-	}
+	
 }
