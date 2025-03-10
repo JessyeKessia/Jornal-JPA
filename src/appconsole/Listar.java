@@ -15,10 +15,16 @@ public class Listar {
             Fachada.inicializar();
 
             System.out.println("*** Listagem de Notícias:");
-           Fachada.listarNoticias();
+            List<Noticia> noticias = Fachada.listarNoticias();
+            for(Noticia n: noticias) {
+            	System.out.println(n);
+            }
     
             System.out.println("\n*** Listagem de Assuntos:");
-            Fachada.listarAssuntos();
+            List<Assunto> assuntos = Fachada.listarAssuntos();
+            for(Assunto a: assuntos) {
+            	System.out.println(a);
+            }
 
         } catch (Exception e) {
             System.out.println("Erro ao listar dados: " + e.getMessage());
@@ -27,7 +33,9 @@ public class Listar {
         }
     }
 
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
+		
         new Listar();
     }
 }

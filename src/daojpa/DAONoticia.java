@@ -49,17 +49,21 @@ public class DAONoticia  extends DAO<Noticia>{
 	   return q.getResultList();
 	}
 	
-	public List<Noticia> readByNumeroComentarios(int n) {
-	    String jpa = "select n from Noticia n where size(n.comentarios) > :n ";
-	    TypedQuery<Noticia> q = manager.createQuery(jpa, Noticia.class);
-	    q.setParameter("n", n);
-	    return q.getResultList();	    
+	public List<Noticia> readByNumeroComentarios(int n) {	    
+	    List<Noticia> info = this.readAll();
+	    return info.stream().filter(a -> a.getComentarios().size() > n).toList();	
 	    }
 	
 	public List<Noticia> readLikeTitulo(String caracteres) {
-		String jpa = "select p from Pessoa p where p.nome like :x ";
+		String jpa = "select n from Noticia n where p.nome like :x ";
 		TypedQuery<Noticia> q = manager.createQuery(jpa,Noticia.class);
 		q.setParameter("x", "%" + caracteres.toUpperCase() + "%");
+		return q.getResultList();
+	}
+	
+	public List<Noticia> readAll() {
+		String jpa = "select n from Noticia n";
+		TypedQuery<Noticia> q = manager.createQuery(jpa,Noticia.class);
 		return q.getResultList();
 	}
 	

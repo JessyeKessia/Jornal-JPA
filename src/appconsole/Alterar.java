@@ -1,3 +1,4 @@
+
 package appconsole;
 /**********************************
  * IFPB - SI
@@ -13,9 +14,9 @@ public class Alterar {
 		Fachada.inicializar();
 		//altera�ao 1
 		try {
-			Fachada.alterartitulo("Novo filme brasileiro é aclamado em festival internacional","POB 2024.2");
-			System.out.println("alterado TITULO  de Novo filme brasileiro é aclamado "
-					+ "em festival internacional para POB 2024.2");
+			Fachada.alterartitulo("NOVA IA REVOLUCIONA MERCADO","POB 2024.2");
+			System.out.println("NOVA IA REVOLUCIONA MERCADO para POB 2024.2");
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -23,8 +24,8 @@ public class Alterar {
 		
 		//altera�ao 2
 		try {
-			Fachada.alterarData("POB 2024.2", "04/12/2024");
-			System.out.println("alteradA DATA DE POB 2024.2  para 04/12/2024");
+			Fachada.alterarData("POB 2024.2", "13/03/2025");
+			System.out.println("alteradA DATA DE POB 2024.2  para 13/03/2025");
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
