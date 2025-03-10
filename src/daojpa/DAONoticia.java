@@ -3,105 +3,68 @@
  * POB - Persistencia de Objetos
  * Prof. Fausto Ayres
  **********************************/
-package daodb4o;
+package daojpa;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.db4o.query.Candidate;
-import com.db4o.query.Evaluation;
-import com.db4o.query.Query;
-
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import modelo.Noticia;
 
 public class DAONoticia  extends DAO<Noticia>{
 
  
-	public Noticia read (String titulo) {
-		Query q = manager.query();
-		q.constrain(Noticia.class);
-		q.descend("titulo").constrain(titulo).like();
-		List<Noticia> resultados = q.execute();
-		if (resultados.size()>0)
-			return resultados.get(0);
-		else
-			return null;
-	}
-
-	public void create(Noticia obj){
-		int novoid = super.gerarId(Noticia.class);  	
-		obj.setId(novoid);				
-		manager.store( obj );
-	}
+	
 	/**********************************************************
 	 * 
 	 * TODAS AS CONSULTAS DE NOTICIA
 	 * 
 	 **********************************************************/
 
-	public List<Noticia> readAll(String caracteres) {
-		Query q = manager.query();
-		q.constrain(Noticia.class);
-		q.descend("titulo").constrain(caracteres).like();		
-		List<Noticia> result = q.execute(); 
-		return result;
-	}
 	
-	public List<Noticia> readComentarios(){
-		Query q = manager.query();
-		q.constrain(Noticia.class);
-		q.descend("comentarios");
-		List<Noticia> resultados = q.execute();
-		if(resultados.isEmpty())
+	@Override
+	public Noticia read(Object chave) {
+		try {
+			String titulo = (String) chave;
+			TypedQuery<Noticia> q = manager.createQuery("select n from Noticia n where n.titulo = :n", Noticia.class);
+			q.setParameter("n",titulo.toUpperCase());
+			return q.getSingleResult();
+		}catch (NoResultException e) {
 			return null;
-		else
-			return resultados;
+		}
 	}
 	
 	public List<Noticia> readByData(String data) {
-		Query q = manager.query();
-		q.constrain(Noticia.class);  
-		q.descend("data").constrain(data).contains();
-		return q.execute();
+		String jpa = "select n from Noticia n where n.data = :n";
+		TypedQuery<Noticia> q = manager.createQuery(jpa,Noticia.class);
+		q.setParameter("n", data);
+		return q.getResultList();
 	}
 	
 	public List<Noticia> readByAssunto(String nomeAssunto) {
-	    Query q = manager.query();
-	    q.constrain(Noticia.class);
-	    q.descend("assuntos").descend("nome").constrain(nomeAssunto).like();
-	    List<Noticia> resultado = q.execute();
-	    if(resultado.isEmpty()) {return null;}	
-		else
-			return resultado;    
+	   String jpa = "Select n from Noticia n join n.assuntos a where a.nome = :n";
+	   TypedQuery<Noticia> q = manager.createQuery(jpa, Noticia.class);
+	   q.setParameter("n", nomeAssunto.toUpperCase());
+	   return q.getResultList();
 	}
 	
 	public List<Noticia> readByNumeroComentarios(int n) {
-	    Query q = manager.query();
-	    q.constrain(Noticia.class);
-	    q.constrain(new Filtro(n));
-	    List<Noticia> resultado = q.execute();
-	    if(resultado.isEmpty())
-			return null;
-		else
-			return resultado;  
+	    String jpa = "select n from Noticia n where size(n.comentarios) > :n ";
+	    TypedQuery<Noticia> q = manager.createQuery(jpa, Noticia.class);
+	    q.setParameter("n", n);
+	    return q.getResultList();	    
 	    }
+	
+	public List<Noticia> readLikeTitulo(String caracteres) {
+		String jpa = "select p from Pessoa p where p.nome like :x ";
+		TypedQuery<Noticia> q = manager.createQuery(jpa,Noticia.class);
+		q.setParameter("x", "%" + caracteres.toUpperCase() + "%");
+		return q.getResultList();
+	}
 	
 }
 
-class Filtro implements Evaluation{
-	private int n;
-	public Filtro(int n) {
-		{this.n = n;}
-	}
-	public void evaluate(Candidate candidate) {
-		Noticia n = (Noticia) candidate.getObject();
-		if(n.getComentarios().size()== this.n)
-		candidate.include(true);
-		else
-		candidate.include(false);
-		}
-}
 
 
 

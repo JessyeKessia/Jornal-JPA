@@ -133,7 +133,7 @@ public class TelaConsultaNoticias {
 						String mes = JOptionPane.showInputDialog("digite o mes");
 						List<Noticia> resultado1 = null;
 						try {
-							resultado1 = Fachada.consultarData(mes);
+							resultado1 = Fachada.consultarNoticiaPorData(mes);
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							 JOptionPane.showMessageDialog(frame, 

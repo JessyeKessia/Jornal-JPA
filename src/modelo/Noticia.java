@@ -25,7 +25,7 @@ public class Noticia {
 	
 	public Noticia () {}
 	public Noticia(String titulo, String data, String link) {
-		this.titulo = titulo;
+		this.titulo = titulo.toUpperCase();
 		this.data = data;
 		this.linkWeb = link;
 	}
@@ -35,7 +35,7 @@ public class Noticia {
 	}
 
 	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+		this.titulo = titulo.toUpperCase();
 	}
 
 	public String getData() {

@@ -28,7 +28,7 @@ public class Assunto {
 	public Assunto () {}
 	public Assunto (String nome){
 		//this.id = ???;
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 	
 	public String getNome() {
@@ -36,7 +36,7 @@ public class Assunto {
 	}
 	
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 	
 	public int getId() {

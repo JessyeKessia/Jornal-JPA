@@ -310,7 +310,7 @@ public class Fachada {
 		if (caracteres.isEmpty())
 			result = daonoticia.readAll();
 		else
-			result = daonoticia.readAll(caracteres);
+			result = daonoticia.readLikeTitulo(caracteres);
 		if (result.size() == 0)
 			throw new Exception("Nenhuma noticia encontrada.");
 		return result;
@@ -321,13 +321,13 @@ public class Fachada {
 		if (caracteres.isEmpty())
 			result = daoassunto.readAll();
 		else
-			result = daoassunto.readAll(caracteres.trim());
+			result = daoassunto.readLikeNome(caracteres.trim());
 		if (result.size() == 0)
 			throw new Exception("Nenhum assunto encontrado.");
 		return result;
 	}
 
-	public static List<Noticia> consultarData(String data) throws Exception {
+	public static List<Noticia> consultarNoticiaPorData(String data) throws Exception {
 		List<Noticia> result;
 		result = daonoticia.readByData(data.trim());
 		if (result.size() == 0)
