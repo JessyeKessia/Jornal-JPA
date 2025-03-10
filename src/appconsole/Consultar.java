@@ -14,6 +14,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import modelo.Assunto;
 import modelo.Noticia;
+import regras_negocio.Fachada;
 
 
 public class Consultar {
@@ -22,40 +23,22 @@ public class Consultar {
 	public Consultar(){
 
 		try {
-			manager = Util.conectarBanco();
+			Fachada.inicializar();
 			
-			TypedQuery<Noticia> query1;
-			List<Noticia> noticias;
-			String jpql;
-			
-			
-			System.out.println("----- Listar noticias com base na data 2025-02-19 -----");
-			jpql = "select n from Noticia n where n.data = '2025-02-19'";
-			query1 = manager.createQuery(jpql, Noticia.class);
-			noticias = query1.getResultList();
+			System.out.println("----- Listar noticias com base na data 19/02/2025 -----");
+			List<Noticia> noticias = Fachada.consultarNoticiaPorData("19/02/2025");
 			for (Noticia n : noticias)
 			System.out.println(n);
 			
 			
 			System.out.println("\n----- Listar noticias com base em um assunto de nome N = Economia -----");
-			jpql = "select n from Noticia n join n.assuntos a where a.nome = 'Economia'";
-			query1 = manager.createQuery(jpql, Noticia.class);
-			noticias = query1.getResultList();
-			for (Noticia n : noticias)
+			List<Noticia> noticias2 = Fachada.consultarNoticiasPorAssunto("economia");
+			for (Noticia n : noticias2)
 			    System.out.println(n);
 			
 			System.out.println("\n----- Listar noticias com base na quantidade N > 3 de comentários -----");
-			jpql = "SELECT n FROM Noticia n";
-			query1 = manager.createQuery(jpql, Noticia.class);
-			noticias = query1.getResultList();
-
-			int quantidadeComentarios = 3; 
-			
-			List<Noticia> noticiasFiltradas = noticias.stream()
-			    .filter(n -> n.getComentarios().size() > quantidadeComentarios)
-			    .toList();
-			
-			for (Noticia n : noticiasFiltradas) {
+			List<Noticia> noticias3 = Fachada.consultarNoticiaPorNumComent(2);		
+			for (Noticia n : noticias3) {
 			    System.out.println(n);
 			}
 

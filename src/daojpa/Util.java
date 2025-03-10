@@ -40,7 +40,7 @@ public class Util {
 				configuracoes.setProperty("jakarta.persistence.jdbc.driver", "org.postgresql.Driver");
 				configuracoes.setProperty("jakarta.persistence.jdbc.url", "jdbc:postgresql://" + ip + ":5432/" + banco);
 				configuracoes.setProperty("jakarta.persistence.jdbc.user", "postgres");
-				configuracoes.setProperty("jakarta.persistence.jdbc.password", "ifpb");
+				configuracoes.setProperty("jakarta.persistence.jdbc.password", "Janderson777");
 				// -----------------------------------------------------------------------------------
 				String unit_name = "hibernate" + "-" + sgbd;
 				factory = Persistence.createEntityManagerFactory(unit_name, configuracoes);

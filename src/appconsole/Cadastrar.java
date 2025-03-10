@@ -2,94 +2,62 @@
  * IFPB - Curso Superior de Tec. em Sist. para Internet
  * Prof. Fausto Maranhão Ayres
  **********************************/
- 
+
 package appconsole;
 
 import jakarta.persistence.EntityManager;
 import modelo.Assunto;
 import modelo.Noticia;
+import regras_negocio.Fachada;
 
 public class Cadastrar {
-    private EntityManager manager;
+	private EntityManager manager;
 
-    public Cadastrar() {
-        try {
-            manager = Util.conectarBanco();
+	public Cadastrar() {
+		try {
+			Fachada.inicializar();
 
-            System.out.println("Cadastrando...");
+			System.out.println("Cadastrando...");
 
-            // Criando assuntos
-            Assunto brasil = new Assunto("Brasil");
-            Assunto tecnologia = new Assunto("Tecnologia");
-            Assunto politica = new Assunto("Política");
-            Assunto esporte = new Assunto("Esporte");
-            Assunto economia = new Assunto("Economia");
-            Assunto saude = new Assunto("Saude");
-            Assunto entreterimento = new Assunto("Entreterimento");
+	
+			Fachada.criarNoticia("Nova IA revoluciona mercado", "19/02/2025", "https://technews.com/ia", "Tecnologia");
+			Fachada.adicionarComentarios("Nova IA revoluciona mercado", "Muito interessante essa IA!");
+			Fachada.adicionarComentarios("Nova IA revoluciona mercado", "A tecnologia está avançando muito rápido.");
+			Fachada.adicionarComentarios("Nova IA revoluciona mercado",
+					"kkkk já já elas se revoltam e aí eu quero ver");
+			Fachada.adicionarComentarios("Nova IA revoluciona mercado",
+					"Tenho medo de perder meu emprego para uma IA...");
 
-            manager.getTransaction().begin();
-            manager.persist(brasil);
-            manager.persist(tecnologia);
-            manager.persist(politica);
-            manager.persist(esporte);
-            manager.persist(saude);
-            manager.persist(economia);
-            
-            manager.getTransaction().commit();
+			Fachada.criarNoticia("Eleições e os novos desafios", "19/02/2025", "https://news.com/politica", "Politica");
+			Fachada.AdicionarAssunto("Eleições e os novos desafios", "Brasil");
+			Fachada.adicionarComentarios("Eleições e os novos desafios", "Será uma eleição difícil!");
+			Fachada.adicionarComentarios("Eleições e os novos desafios", "A política está cada vez mais polarizada.");
+			Fachada.adicionarComentarios("Eleições e os novos desafios", "Esse careca acha que é o dono do Brasil.");
 
-            // Criando notícias e associando aos assuntos
-            manager.getTransaction().begin();
-            Noticia noticia1 = new Noticia("Nova IA revoluciona mercado", "2025-02-19", "https://technews.com/ia");
-            noticia1.adicionar(tecnologia);
-            tecnologia.adicionar(noticia1);
-            brasil.adicionar(noticia1);
-            noticia1.adicionarComentario("Muito interessante essa IA!");
-            noticia1.adicionarComentario("A tecnologia está avançando muito rápido.");
-            noticia1.adicionarComentario("kkkk já já elas se revoltam e aí eu quero ver");
-            noticia1.adicionarComentario("Tenho medo de perder meu emprego para uma IA...");
-            manager.persist(noticia1);
-            manager.getTransaction().commit();
+			Fachada.criarNoticia("Final do campeonato emocionante", "19/02/2025", "https://sports.com/final",
+					"Esporte");
+			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Entreterimento");
+			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Futebol");
+			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Brasil");
+			Fachada.adicionarComentarios("Final do campeonato emocionante", "Que final! Incrível!");
+			Fachada.adicionarComentarios("Final do campeonato emocionante",
+					"Espero que o próximo campeonato seja ainda melhor.");
 
-            manager.getTransaction().begin();
-            Noticia noticia2 = new Noticia("Eleições e os novos desafios", "2025-02-19", "https://news.com/politica");
-            noticia2.adicionar(politica);
-            politica.adicionar(noticia2);
-            brasil.adicionar(noticia2);
-            noticia2.adicionarComentario("Será uma eleição difícil!");
-            noticia2.adicionarComentario("A política está cada vez mais polarizada.");
-            noticia2.adicionarComentario("Esse careca acha que é o dono do Brasil.");
-            manager.persist(noticia2);
-            manager.getTransaction().commit();
+			Fachada.criarNoticia("Stock exchange in the USA", "19/02/2025", "https://economy.com/", "economia");
+			Fachada.AdicionarAssunto("Stock exchange in the USA", "USA");
+			Fachada.AdicionarAssunto("Stock exchange in the USA", "Mundo");
+			Fachada.adicionarComentarios("Stock exchange in the USA", "Great opportunity!");
+			Fachada.adicionarComentarios("Stock exchange in the USA",
+					"Stock market on the rise! Investors are optimistic as markets show strong performance this week.");
 
-            manager.getTransaction().begin();
-            Noticia noticia3 = new Noticia("Final do campeonato emocionante", "2025-02-19", "https://sports.com/final");
-            noticia3.adicionar(esporte);
-            esporte.adicionar(noticia3);
-            brasil.adicionar(noticia3);
-            saude.adicionar(noticia3);
-            entreterimento.adicionar(noticia3);
-            noticia3.adicionarComentario("Que final! Incrível!");
-            noticia3.adicionarComentario("Espero que o próximo campeonato seja ainda melhor.");
-            manager.persist(noticia3);
-            manager.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Exceção=" + e.getMessage());
+		}
+		Util.fecharBanco();
+		System.out.println("Fim da aplicação");
+	}
 
-            manager.getTransaction().begin();
-            Noticia noticia4 = new Noticia("Stock exchange in the USA", "2025-02-19", "https://economy.com/");
-            noticia4.adicionar(economia);
-            economia.adicionar(noticia4);
-            noticia4.adicionarComentario("Great opportunity!");
-            noticia4.adicionarComentario("Stock market on the rise! Investors are optimistic as markets show strong performance this week.");
-            manager.persist(noticia4);
-            manager.getTransaction().commit();
-
-        } catch (Exception e) {
-            System.out.println("Exceção=" + e.getMessage());
-        }
-        Util.fecharBanco();
-        System.out.println("Fim da aplicação");
-    }
-
-    public static void main(String[] args) {
-        new Cadastrar();
-    }
+	public static void main(String[] args) {
+		new Cadastrar();
+	}
 }

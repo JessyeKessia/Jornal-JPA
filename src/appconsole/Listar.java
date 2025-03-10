@@ -12,32 +12,18 @@ public class Listar {
 
     public Listar() {
         try {
-            manager = Util.conectarBanco();
-            String jpql;
-
-            
+            Fachada.inicializar();
 
             System.out.println("*** Listagem de Notícias:");
-            jpql = "SELECT n FROM Noticia n";
-            TypedQuery<Noticia> queryNoticias = manager.createQuery(jpql, Noticia.class);
-            List<Noticia> noticias = queryNoticias.getResultList();
-            for (Noticia n : noticias) {
-                System.out.println(n);
-            }
-
-       
+           Fachada.listarNoticias();
+    
             System.out.println("\n*** Listagem de Assuntos:");
-            jpql = "SELECT a FROM Assunto a";
-            TypedQuery<Assunto> queryAssuntos = manager.createQuery(jpql, Assunto.class);
-            List<Assunto> assuntos = queryAssuntos.getResultList();
-            for (Assunto a : assuntos) {
-                System.out.println(a);
-            }
+            Fachada.listarAssuntos();
 
         } catch (Exception e) {
             System.out.println("Erro ao listar dados: " + e.getMessage());
         } finally {
-            Util.fecharBanco();
+            Fachada.finalizar();
         }
     }
 
