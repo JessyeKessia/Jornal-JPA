@@ -47,7 +47,7 @@ public class Consultar {
 			System.out.println(e.getMessage());
 		}
 
-		Util.fecharBanco();
+		Fachada.finalizar();
 		System.out.println("\nfim da aplicacao");
 	}
 

@@ -53,7 +53,7 @@ public class Cadastrar {
 		} catch (Exception e) {
 			System.out.println("Exceção=" + e.getMessage());
 		}
-		Util.fecharBanco();
+		Fachada.finalizar();
 		System.out.println("Fim da aplicação");
 	}
 
