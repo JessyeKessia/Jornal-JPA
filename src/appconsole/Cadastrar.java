@@ -11,7 +11,7 @@ import modelo.Noticia;
 import regras_negocio.Fachada;
 
 public class Cadastrar {
-	private EntityManager manager;
+
 
 	public Cadastrar() {
 		try {
@@ -21,6 +21,7 @@ public class Cadastrar {
 
 	
 			Fachada.criarNoticia("Nova IA revoluciona mercado", "19/02/2025", "https://technews.com/ia", "Tecnologia");
+			Fachada.adicionarImagem("Nova IA revoluciona mercado", "journal.jpg");
 			Fachada.adicionarComentarios("Nova IA revoluciona mercado", "Muito interessante essa IA!");
 			Fachada.adicionarComentarios("Nova IA revoluciona mercado", "A tecnologia está avançando muito rápido.");
 			Fachada.adicionarComentarios("Nova IA revoluciona mercado",
@@ -29,6 +30,7 @@ public class Cadastrar {
 					"Tenho medo de perder meu emprego para uma IA...");
 
 			Fachada.criarNoticia("Eleições e os novos desafios", "19/02/2025", "https://news.com/politica", "Politica");
+			Fachada.adicionarImagem("Eleições e os novos desafios", "journal.jpg");
 			Fachada.AdicionarAssunto("Eleições e os novos desafios", "Brasil");
 			Fachada.adicionarComentarios("Eleições e os novos desafios", "Será uma eleição difícil!");
 			Fachada.adicionarComentarios("Eleições e os novos desafios", "A política está cada vez mais polarizada.");
@@ -36,6 +38,7 @@ public class Cadastrar {
 
 			Fachada.criarNoticia("Final do campeonato emocionante", "19/02/2025", "https://sports.com/final",
 					"Esporte");
+			Fachada.adicionarImagem("Final do campeonato emocionante", "journal.jpg");
 			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Entreterimento");
 			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Futebol");
 			Fachada.AdicionarAssunto("Final do campeonato emocionante", "Brasil");
@@ -44,6 +47,7 @@ public class Cadastrar {
 					"Espero que o próximo campeonato seja ainda melhor.");
 
 			Fachada.criarNoticia("Stock exchange in the USA", "19/02/2025", "https://economy.com/", "economia");
+			Fachada.adicionarImagem("Stock exchange in the USA", "journal.jpg");
 			Fachada.AdicionarAssunto("Stock exchange in the USA", "USA");
 			Fachada.AdicionarAssunto("Stock exchange in the USA", "Mundo");
 			Fachada.adicionarComentarios("Stock exchange in the USA", "Great opportunity!");

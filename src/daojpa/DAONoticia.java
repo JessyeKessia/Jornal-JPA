@@ -76,7 +76,7 @@ public class DAONoticia  extends DAO<Noticia>{
 	}
 	
 	public byte[] buscarFoto(String arquivo) {
-		String caminho = "/fotos/"+arquivo;
+		String caminho = "/imagens/"+arquivo;
 		try {
 			URL url = getClass().getResource(caminho);
 			File f = new File(url.toURI());				// pasta src/fotos (interna)
