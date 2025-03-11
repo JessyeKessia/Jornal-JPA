@@ -6,7 +6,15 @@
 package daojpa;
 
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -66,6 +74,24 @@ public class DAONoticia  extends DAO<Noticia>{
 		TypedQuery<Noticia> q = manager.createQuery(jpa,Noticia.class);
 		return q.getResultList();
 	}
+	
+	public byte[] buscarFoto(String arquivo) {
+		String caminho = "/fotos/"+arquivo;
+		try {
+			URL url = getClass().getResource(caminho);
+			File f = new File(url.toURI());				// pasta src/fotos (interna)
+			BufferedImage buffer = ImageIO.read(f);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(buffer, "jpg", baos );
+			byte[] bytesfoto = baos.toByteArray();
+			baos.close();
+			return bytesfoto;
+		} catch (IOException e) {
+			throw new RuntimeException("arquivo invalido:"+caminho);
+		} catch (URISyntaxException e) {
+			throw new RuntimeException("caminho invalido:"+caminho);
+		}}
+
 	
 }
 

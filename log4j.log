@@ -1,44 +1,67 @@
-12:24:02,553  INFO Util:28 - ----conectar banco - lendo arquivo de propriedades 
-12:24:02,561  INFO Util:33 - sgbd => postgresql
-12:24:02,561  INFO Util:34 - banco => pob
-12:24:02,561  INFO Util:35 - ip => localhost
-12:24:02,561  INFO Util:39 - ----configurando postgresql
-12:24:02,603 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-12:24:02,796  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-12:24:02,888  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
-12:24:02,955 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-12:24:02,956  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-12:24:03,444  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
-12:24:03,450  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-12:24:03,450  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
-12:24:03,451  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
-12:24:03,451  INFO pooling:171 - HHH10001003: Autocommit mode: false
-12:24:03,455  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
-12:24:06,034  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-12:24:06,070  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@415795f3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-12:24:06,831 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
-12:24:06,878 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-12:24:06,880 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
-12:24:06,889 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-12:24:06,890 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
-12:24:06,893 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-12:24:06,894 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
-12:24:06,901 DEBUG SQL:135 - select a1_0.id,a1_0.nome from Assunto a1_0
-12:24:06,907 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,907 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
-12:24:06,910 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,911 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
-12:24:06,916 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,916 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
-12:24:06,921 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,922 TRACE bind:24 - binding parameter (1:INTEGER) <- [5]
-12:24:06,924 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,925 TRACE bind:24 - binding parameter (1:INTEGER) <- [6]
-12:24:06,928 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,929 TRACE bind:24 - binding parameter (1:INTEGER) <- [7]
-12:24:06,935 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,936 TRACE bind:24 - binding parameter (1:INTEGER) <- [8]
-12:24:06,939 DEBUG SQL:135 - select n1_0.assuntos_id,n1_1.id,n1_1.comentarios,n1_1.data,n1_1.linkWeb,n1_1.titulo from Assunto_Noticia n1_0 join Noticia n1_1 on n1_1.id=n1_0.noticias_id where n1_0.assuntos_id=?
-12:24:06,941 TRACE bind:24 - binding parameter (1:INTEGER) <- [9]
-12:24:06,944  INFO Util:58 - ----desconectar banco
-12:24:06,948  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
+17:47:36,270  INFO Util:28 - ----conectar banco - lendo arquivo de propriedades 
+17:47:36,278  INFO Util:33 - sgbd => postgresql
+17:47:36,278  INFO Util:34 - banco => pob
+17:47:36,279  INFO Util:35 - ip => localhost
+17:47:36,279  INFO Util:39 - ----configurando postgresql
+17:47:36,326 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+17:47:36,547  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+17:47:36,651  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+17:47:36,752 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+17:47:36,754  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+17:47:37,519  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
+17:47:37,528  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+17:47:37,528  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
+17:47:37,529  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
+17:47:37,529  INFO pooling:171 - HHH10001003: Autocommit mode: false
+17:47:37,534  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
+17:47:37,999  WARN JdbcEnvironmentInitiator:359 - HHH000342: Could not obtain connection to query metadata
+java.lang.IllegalStateException: Cannot get a connection as the driver manager is not properly initialized
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:260)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:437)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:290)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:123)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:77)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:68)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:52)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:136)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:247)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:133)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:43)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:61)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:500)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.<init>(DriverManagerConnectionProviderImpl.java:373)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections$Builder.build(DriverManagerConnectionProviderImpl.java:551)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:102)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:82)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:136)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:247)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.service.ServiceRegistry.requireService(ServiceRegistry.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:404)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:276)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:123)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:77)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:55)
+	at jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:80)
+	at daojpa.Util.conectarBanco(Util.java:46)
+	at daojpa.DAO.open(DAO.java:19)
+	at regras_negocio.Fachada.inicializar(Fachada.java:28)
+	at appconsole.Cadastrar.<init>(Cadastrar.java:18)
+	at appconsole.Cadastrar.main(Cadastrar.java:61)
+17:47:38,008  INFO Util:50 - problema de configuracao: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Error calling Driver.connect() [FATAL: autentica��o do tipo senha falhou para o usu�rio "postgres"]

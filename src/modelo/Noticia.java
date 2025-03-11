@@ -18,7 +18,8 @@ public class Noticia {
 	private String titulo;
 	private String data;
 	private String linkWeb;
-	
+	private byte[] foto;
+
 	@ManyToMany(mappedBy="noticias", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private List<Assunto> assuntos = new ArrayList<Assunto>();
 	private List<String> comentarios = new ArrayList<String>();
@@ -99,6 +100,13 @@ public class Noticia {
 
 	    sb.append("]}");
 	    return sb.toString();
+	}
+	
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

@@ -1,5 +1,12 @@
 package regras_negocio;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 /**********************************
  * IFPB - SI
  * POB - Persistencia de Objetos
@@ -10,6 +17,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import daojpa.DAO;
 import daojpa.DAONoticia;
@@ -299,7 +308,28 @@ public class Fachada {
 		}
 		return saida;
 	}
-
+	
+	public static void adicionarImagem(String titulo, String arquivo) throws Exception {
+		DAO.begin();
+		Noticia n = daonoticia.read(titulo.trim());
+		if(n==null) {
+			DAO.rollback();
+			throw new Exception("Noticia não encontrada...");
+		}
+		byte[] img = daonoticia.buscarFoto(arquivo.trim());
+		if(img.length == 0) {
+			DAO.rollback();
+			throw new Exception("Arquivo de imagem não encontrado...");
+		}
+		
+		n.setFoto(img);
+		daonoticia.update(n);
+		DAO.commit();
+		
+		
+	} 
+	
+	
 	/**********************************************************
 	 * 
 	 * CONSULTAS IMPLEMENTADAS NOS DAO
@@ -310,7 +340,7 @@ public class Fachada {
 		if (caracteres.isEmpty())
 			result = daonoticia.readAll();
 		else
-			result = daonoticia.readLikeTitulo(caracteres);
+			result = daonoticia.readLikeTitulo(caracteres.trim());
 		if (result.size() == 0)
 			throw new Exception("Nenhuma noticia encontrada.");
 		return result;
@@ -337,7 +367,7 @@ public class Fachada {
 
 	public static List<Noticia> consultarNoticiasPorAssunto(String nomeAssunto) throws Exception {
 		List<Noticia> result;
-		result = daonoticia.readByAssunto(nomeAssunto);
+		result = daonoticia.readByAssunto(nomeAssunto.trim());
 		if (!(result.size() >= 1))
 			throw new Exception("Nenhma noticia está relacionada com este assunto.");
 		return result;
