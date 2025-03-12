@@ -233,7 +233,26 @@ public class TelaNoticias {
 		button_1.setToolTipText("cadastrar nova noticia");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					if (textField_1.getText().isEmpty()) {
+						label.setText("nome vazio");
+						return;
+					}
+					String titulo = textField_1.getText().trim();
+					String data = textField_2.getText().trim();
+					String link = textField_3.getText().trim();
+					String assunto = textField_4.getText().trim();
+
+
+					Fachada.criarNoticia(titulo, data, link, assunto);
+					String Assunto = textField_4.getText();
+					if (!Assunto.isEmpty())
+						Fachada.criarAssunto(Assunto);
+					label.setText("noticia criada");
+					listagem();
+				} catch (Exception ex) {
+					label.setText(ex.getMessage());
+				}
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
