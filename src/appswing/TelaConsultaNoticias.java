@@ -183,7 +183,7 @@ public class TelaConsultaNoticias {
 
 		comboBox = new JComboBox<String>();
 		comboBox.setToolTipText("selecione a consulta");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Noticias do dia 29/11/2024", "Noticias com o Assunto X", "Assunto com N Noticias"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Pesquisar noticias pela data DD/MM/AAAA", "Noticias com o Assunto X", "Noticia com quantidade maior que N comentários"}));
 		comboBox.setBounds(21, 10, 513, 22);
 		frame.getContentPane().add(comboBox);
 	}
