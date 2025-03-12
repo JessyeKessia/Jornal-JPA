@@ -1,34 +1,73 @@
-21:53:07,762  INFO Util:28 - ----conectar banco - lendo arquivo de propriedades 
-21:53:07,772  INFO Util:33 - sgbd => postgresql
-21:53:07,774  INFO Util:34 - banco => pob
-21:53:07,774  INFO Util:35 - ip => localhost
-21:53:07,775  INFO Util:39 - ----configurando postgresql
-21:53:07,842 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-21:53:08,068  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-21:53:08,153  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
-21:53:08,201 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-21:53:08,202  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-21:53:08,548  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
-21:53:08,553  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-21:53:08,553  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
-21:53:08,553  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
-21:53:08,553  INFO pooling:171 - HHH10001003: Autocommit mode: false
-21:53:08,556  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
-21:53:10,758  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-21:53:10,799  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5a6730e4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-21:53:10,866 DEBUG SQL:135 - alter table if exists Noticia alter column foto set data type bytea
-21:53:11,317 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
-21:53:11,416 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:53:11,417 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
-21:53:11,424 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:53:11,425 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
-21:53:11,427 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:53:11,427 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
-21:53:11,430 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
-21:53:11,430 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
-21:53:13,167 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
-21:53:13,167 TRACE bind:24 - binding parameter (1:VARCHAR) <- [NOVA IA REVOLUCIONA MERCADO]
-21:53:15,397 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
-21:53:15,398 TRACE bind:24 - binding parameter (1:VARCHAR) <- [ELEIÇÕES E OS NOVOS DESAFIOS]
-21:53:19,080  INFO Util:58 - ----desconectar banco
-21:53:19,083  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
+23:20:00,372  INFO Util:28 - ----conectar banco - lendo arquivo de propriedades 
+23:20:00,383  INFO Util:33 - sgbd => postgresql
+23:20:00,384  INFO Util:34 - banco => pob
+23:20:00,384  INFO Util:35 - ip => localhost
+23:20:00,385  INFO Util:39 - ----configurando postgresql
+23:20:00,433 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+23:20:00,659  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+23:20:00,759  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+23:20:00,812 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+23:20:00,814  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+23:20:01,132  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
+23:20:01,138  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+23:20:01,138  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
+23:20:01,138  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
+23:20:01,139  INFO pooling:171 - HHH10001003: Autocommit mode: false
+23:20:01,141  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
+23:20:03,272  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+23:20:03,289  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@701ff55e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+23:20:03,319 DEBUG SQL:135 - alter table if exists Noticia alter column foto set data type bytea
+23:20:03,723 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
+23:20:03,906 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,908 TRACE bind:24 - binding parameter (1:INTEGER) <- [10]
+23:20:03,915 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,916 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
+23:20:03,918 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,918 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
+23:20:03,920 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,921 TRACE bind:24 - binding parameter (1:INTEGER) <- [11]
+23:20:03,924 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,924 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
+23:20:03,927 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,927 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
+23:20:03,929 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,930 TRACE bind:24 - binding parameter (1:INTEGER) <- [12]
+23:20:03,933 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,933 TRACE bind:24 - binding parameter (1:INTEGER) <- [5]
+23:20:03,936 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,937 TRACE bind:24 - binding parameter (1:INTEGER) <- [13]
+23:20:03,939 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,939 TRACE bind:24 - binding parameter (1:INTEGER) <- [6]
+23:20:03,941 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,942 TRACE bind:24 - binding parameter (1:INTEGER) <- [7]
+23:20:03,944 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,944 TRACE bind:24 - binding parameter (1:INTEGER) <- [8]
+23:20:03,947 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,948 TRACE bind:24 - binding parameter (1:INTEGER) <- [14]
+23:20:03,950 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+23:20:03,950 TRACE bind:24 - binding parameter (1:INTEGER) <- [9]
+23:20:18,612 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:18,613 TRACE bind:24 - binding parameter (1:VARCHAR) <- [NOVO FILME DA MARVEL BATE RECORDES DE BILHETERIA]
+23:20:21,408 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:21,409 TRACE bind:24 - binding parameter (1:VARCHAR) <- [ELEIÇÕES E OS NOVOS DESAFIOS]
+23:20:23,141 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:23,142 TRACE bind:24 - binding parameter (1:VARCHAR) <- [FINAL DO CAMPEONATO EMOCIONANTE]
+23:20:25,215 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:25,216 TRACE bind:24 - binding parameter (1:VARCHAR) <- [STOCK EXCHANGE IN THE USA]
+23:20:26,969 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:26,971 TRACE bind:24 - binding parameter (1:VARCHAR) <- [ESTUDO REVELA IMPACTO DAS MUDANÇAS CLIMÁTICAS NA AGRICULTURA]
+23:20:28,740 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:28,741 TRACE bind:24 - binding parameter (1:VARCHAR) <- [NOVO MARCO REGULATÓRIO DO GÁS NATURAL NO BRASIL]
+23:20:31,059 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:31,060 TRACE bind:24 - binding parameter (1:VARCHAR) <- [FINAL DO CAMPEONATO EMOCIONANTE]
+23:20:59,812 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:20:59,813 TRACE bind:24 - binding parameter (1:VARCHAR) <- [FINAL DO CAMPEONATO EMOCIONANTE]
+23:21:00,162 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
+23:21:05,710 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:21:05,711 TRACE bind:24 - binding parameter (1:VARCHAR) <- [ELEIÇÕES E OS NOVOS DESAFIOS]
+23:21:08,014 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:21:08,015 TRACE bind:24 - binding parameter (1:VARCHAR) <- [NOVO FILME DA MARVEL BATE RECORDES DE BILHETERIA]
+23:21:09,741 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+23:21:09,742 TRACE bind:24 - binding parameter (1:VARCHAR) <- [FINAL DO CAMPEONATO EMOCIONANTE]
+23:22:06,458  INFO Util:58 - ----desconectar banco
+23:22:06,464  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]

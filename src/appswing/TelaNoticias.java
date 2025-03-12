@@ -232,6 +232,7 @@ public class TelaNoticias {
 		button_1.setToolTipText("cadastrar nova noticia");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -362,8 +363,7 @@ public class TelaNoticias {
 		panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Imagem",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160))));
 		panel_1.setBounds(391, 289, 315, 122);
 		frame.getContentPane().add(panel_1);
 		
