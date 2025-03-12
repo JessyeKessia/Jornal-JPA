@@ -325,8 +325,7 @@ public class Fachada {
 		n.setFoto(img);
 		daonoticia.update(n);
 		DAO.commit();
-		
-		
+			
 	} 
 	
 	

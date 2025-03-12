@@ -69,6 +69,7 @@ public class TelaNoticias {
 	private JTextField textField_5;
 	private BufferedImage buffer;
 	private JPanel panel_1;
+	private static String nomeArquivo;
 	/**
 	 * Create the application.
 	 */
@@ -239,38 +240,43 @@ public class TelaNoticias {
 		button_1.setBounds(21, 340, 62, 23);
 		frame.getContentPane().add(button_1);
 
+		/** Aqui estou atualizando tudo sempre que uma unica coisa é atualizada. Não é nem de loge o ideal,
+		 *  mas como não existe nas telas a opção de escolher qual campo desejo alterar,
+		 *  é rasoável essa solução.**/
 		button_5 = new JButton("Atualizar");
 		button_5.setToolTipText("atualizar noticia");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String nome = textField_1.getText();
-					String novotitulo = textField_5.getText();
-					byte[] bytesfoto = null;
+					String novotitulo = textField_5.getText().trim();
+					String tituloantigo = textField_1.getText().trim();
+					String novadata = textField_2.getText().trim();
+					String novoLink = textField_3.getText().trim();
+					String novoAssunto = textField_4.getText().trim();
+					if(!novotitulo.isEmpty()) {
+						Fachada.alterartitulo(tituloantigo, novotitulo);
+						label.setText("Atualização realizada com sucesso!");
+					}
+					if(!novadata.isEmpty()){
+						Fachada.alterarData(tituloantigo, novadata);
+					}
+					if(!novoLink.isEmpty()) {
+						Fachada.alterarlink(tituloantigo, novoLink);
+					}
+					if(!novoAssunto.isEmpty()) {
+						Fachada.AdicionarAssunto(tituloantigo, novoAssunto);
+					}	
 				if (buffer != null)	
 					try {
-						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						ImageIO.write(buffer, "jpg", baos);
-						bytesfoto = baos.toByteArray();
-						baos.close();
-					} catch (IOException ex1) {
-						label.setText("problema na convers�o da imagem em bytes");
+						Fachada.adicionarImagem(tituloantigo, nomeArquivo);
+						label.setText("Atualização realizada com sucesso!");
+					} catch (Exception ex1) {
+						label.setText(ex1.getMessage());
 					}
-					Fachada.adicionarImagem(nome, "journal.jpg");
-					System.out.println("Funfou");
 					if (textField_1.getText().trim().isEmpty()) {
 						label.setText("nome vazio");
 						return;
 					}
-					if (novotitulo.isEmpty()) {
-						label.setText("Foto definida com sucesso");
-						novotitulo = nome;
-					}
-					else {
-						Fachada.alterartitulo(nome, novotitulo);
-						label.setText("Nome de Noticia alterada com sucesso");
-					}
-
 					listagem();
 				} catch (Exception ex2) {
 					label.setText(ex2.getMessage());
@@ -334,9 +340,12 @@ public class TelaNoticias {
 				try {
 					buffer = ImageIO.read(file); // ler imagem do arquivo
 					ImageIcon icon = new ImageIcon(
-							buffer.getScaledInstance(buffer.getWidth(), buffer.getHeight(), Image.SCALE_DEFAULT));
+					buffer.getScaledInstance(buffer.getWidth(), buffer.getHeight(), Image.SCALE_DEFAULT));
 					icon.setImage(icon.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), 1));
 					label_1.setIcon(icon);
+					
+					nomeArquivo = file.getName();
+		            
 				} catch (IOException ex) {
 					label.setText(ex.getMessage());
 				}
