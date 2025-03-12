@@ -130,7 +130,7 @@ public class TelaConsultaNoticias {
 					label_4.setText("");
 					switch(index) {
 					case 0: 
-						String mes = JOptionPane.showInputDialog("digite o mes");
+						String mes = JOptionPane.showInputDialog("digite a data");
 						List<Noticia> resultado1 = null;
 						try {
 							resultado1 = Fachada.consultarNoticiaPorData(mes);
@@ -183,7 +183,8 @@ public class TelaConsultaNoticias {
 
 		comboBox = new JComboBox<String>();
 		comboBox.setToolTipText("selecione a consulta");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Noticias do dia 29/11/2024", "Noticias com o Assunto X", "Assunto com N Noticias"}));
+		comboBox.setModel(new DefaultComboBoxModel<>(
+				new String[] {"Noticias do dia 29/11/2024", "Noticias com o Assunto X", "Assunto com N Noticias"}));
 		comboBox.setBounds(21, 10, 513, 22);
 		frame.getContentPane().add(comboBox);
 	}

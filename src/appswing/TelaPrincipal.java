@@ -77,7 +77,7 @@ public class TelaPrincipal {
 		mnPessoa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaCadastrarAssuntos();
+				new TelaAssuntos();
 			}
 		});
 		menuBar.add(mnPessoa);
@@ -86,7 +86,7 @@ public class TelaPrincipal {
 		mnTelefone.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaCadastrarNoticias();
+				new TelaNoticias();
 			}
 		});
 		menuBar.add(mnTelefone);

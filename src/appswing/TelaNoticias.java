@@ -8,38 +8,49 @@ package appswing;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Noticia;
 import modelo.Assunto;
 import regras_negocio.Fachada;
 
-public class TelaCadastrarNoticias {
+public class TelaNoticias {
 	private JDialog frame;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JButton button;
 	private JButton button_1;
 	private JButton button_3;
 	private JButton button_4;
@@ -49,19 +60,19 @@ public class TelaCadastrarNoticias {
 	private JLabel lblTitulo;
 	private JLabel lblData;
 	private JLabel lblLink;
-	private JLabel lblNomeDaNoticia;
 	private JLabel lblAssunto;
-	private JTextField textField;
+	private JLabel label_1;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
+	private BufferedImage buffer;
+	private JPanel panel_1;
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastrarNoticias() {
+	public TelaNoticias() {
 		initialize();
 	}
 
@@ -85,7 +96,7 @@ public class TelaCadastrarNoticias {
 			}
 		});
 		frame.setTitle("Noticias");
-		frame.setBounds(100, 100, 744, 428);
+		frame.setBounds(100, 100, 744, 461);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -116,6 +127,9 @@ public class TelaCadastrarNoticias {
 						textField_3.setText(String.join(",", p.getLinkWeb()));
 						textField_4.setText("");
 						label.setText("");
+						ImageIcon icon = carregarImagem(p);
+						label_1.setIcon(icon);
+						
 					}
 				} catch (Exception erro) {
 					label.setText(erro.getMessage());
@@ -170,24 +184,8 @@ public class TelaCadastrarNoticias {
 
 		label = new JLabel("");
 		label.setForeground(Color.RED);
-		label.setBounds(21, 372, 607, 14);
+		label.setBounds(72, 11, 607, 14);
 		frame.getContentPane().add(label);
-
-		button = new JButton("Buscar por nome");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listagem();
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button.setBounds(227, 27, 149, 23);
-		frame.getContentPane().add(button);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(111, 28, 106, 20);
-		frame.getContentPane().add(textField);
 
 		lblSelecioneUmaNoticia = new JLabel("selecione uma noticia para editar");
 		lblSelecioneUmaNoticia.setBounds(21, 216, 394, 14);
@@ -234,27 +232,6 @@ public class TelaCadastrarNoticias {
 		button_1.setToolTipText("cadastrar nova noticia");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					if (textField_1.getText().isEmpty()) {
-						label.setText("nome vazio");
-						return;
-					}
-					String titulo = textField_1.getText().trim();
-					String data = textField_2.getText().trim();
-					String link = textField_3.getText().trim();
-					String assunto = textField_4.getText().trim();
-
-
-					Fachada.criarNoticia(titulo, data, link, assunto);
-					String Assunto = textField_4.getText();
-					if (!Assunto.isEmpty())
-						Fachada.criarAssunto(Assunto);
-
-					label.setText("noticia criada");
-					listagem();
-				} catch (Exception ex) {
-					label.setText(ex.getMessage());
-				}
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -262,19 +239,37 @@ public class TelaCadastrarNoticias {
 		frame.getContentPane().add(button_1);
 
 		button_5 = new JButton("Atualizar");
-		button_5.setToolTipText("atualizar pessoa ");
+		button_5.setToolTipText("atualizar noticia");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					String nome = textField_1.getText();
+					String novotitulo = textField_5.getText();
+					byte[] bytesfoto = null;
+				if (buffer != null)	
+					try {
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						ImageIO.write(buffer, "jpg", baos);
+						bytesfoto = baos.toByteArray();
+						baos.close();
+					} catch (IOException ex1) {
+						label.setText("problema na convers�o da imagem em bytes");
+					}
+					Fachada.adicionarImagem(nome, "journal.jpg");
+					System.out.println("Funfou");
 					if (textField_1.getText().trim().isEmpty()) {
 						label.setText("nome vazio");
 						return;
 					}
-					String nome = textField_1.getText();
-					String novotitulo = textField_5.getText();
-					Fachada.alterartitulo(nome, novotitulo);
-					
-					label.setText("Noticia alterada");
+					if (novotitulo.isEmpty()) {
+						label.setText("Foto definida com sucesso");
+						novotitulo = nome;
+					}
+					else {
+						Fachada.alterartitulo(nome, novotitulo);
+						label.setText("Nome de Noticia alterada com sucesso");
+					}
+
 					listagem();
 				} catch (Exception ex2) {
 					label.setText(ex2.getMessage());
@@ -285,10 +280,6 @@ public class TelaCadastrarNoticias {
 		button_5.setBounds(82, 340, 87, 23);
 		frame.getContentPane().add(button_5);
 
-		lblNomeDaNoticia = new JLabel("Nome da Noticia:");
-		lblNomeDaNoticia.setBounds(21, 32, 106, 14);
-		frame.getContentPane().add(lblNomeDaNoticia);
-
 		button_3 = new JButton("Limpar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -298,7 +289,7 @@ public class TelaCadastrarNoticias {
 				textField_4.setText("");
 			}
 		});
-		button_3.setBounds(539, 235, 89, 23);
+		button_3.setBounds(426, 260, 89, 23);
 		frame.getContentPane().add(button_3);
 
 		lblAssunto = new JLabel("Assunto:");
@@ -325,9 +316,73 @@ public class TelaCadastrarNoticias {
 		lblNovoTitulo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNovoTitulo.setBounds(276, 239, 62, 14);
 		frame.getContentPane().add(lblNovoTitulo);
+		
+		JButton button_6 = new JButton("Selecionar");
+		button_6.setToolTipText("Selecionar imagem");
+		button_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField_1.getText().isEmpty()) {
+					label.setText("selecione uma noticia");
+					return;
+				}
+				File file = selecionarArquivoFoto();
+				if (file == null)
+					return; // arquivo nao foi selecionado
+
+				try {
+					buffer = ImageIO.read(file); // ler imagem do arquivo
+					ImageIcon icon = new ImageIcon(
+							buffer.getScaledInstance(buffer.getWidth(), buffer.getHeight(), Image.SCALE_DEFAULT));
+					icon.setImage(icon.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), 1));
+					label_1.setIcon(icon);
+				} catch (IOException ex) {
+					label.setText(ex.getMessage());
+				}
+			}
+		});
+
+		button_6.setBounds(604, 235, 87, 23);
+		frame.getContentPane().add(button_6);
+		
+		JButton button_7 = new JButton("Limpar");
+		button_7.setToolTipText("Limpar imagem");
+		button_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buffer = null;
+				label_1.setIcon(null);
+				label_1.setText("sem imagem");
+				label.setText("");
+			}
+		});
+		button_7.setBounds(604, 264, 87, 23);
+		frame.getContentPane().add(button_7);
+		
+		panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Imagem",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBounds(391, 289, 315, 122);
+		frame.getContentPane().add(panel_1);
+		
+		label_1 = new JLabel("sem imagem");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(10, 11, 295, 100);
+
+		panel_1.add(label_1);
 
 		frame.setVisible(true);
+		
+		
+		
+		
+		
 	}
+	
+
+	
 
 	public void listagem() {
 		try {
@@ -351,7 +406,7 @@ public class TelaCadastrarNoticias {
 				if (p.getAssuntos().size() > 0) {
 					texto2 = "";
 					for (Assunto t : p.getAssuntos())
-						texto2 += t.getId() + " ";
+						texto2 += t.getNome() + ", ";
 				} else
 					texto2 = "sem assuntos";
 				//adicionar linha no table
@@ -370,5 +425,46 @@ public class TelaCadastrarNoticias {
 		} catch (Exception erro) {
 			label.setText(erro.getMessage());
 		}
+		
+		
+	}
+
+		public ImageIcon carregarImagem(Noticia n) {
+			if (n.getFoto() != null) {
+				// converte byte[] para BufferedImage do icon do label
+				InputStream in = new ByteArrayInputStream(n.getFoto());
+				try {
+					buffer = ImageIO.read(in);
+				} catch (IOException e) {
+					label.setText(e.getMessage());
+				}
+				ImageIcon icon = new ImageIcon(
+						buffer.getScaledInstance(buffer.getWidth(), buffer.getHeight(), Image.SCALE_DEFAULT));
+				icon.setImage(icon.getImage().getScaledInstance(label_1.getWidth(), label_1.getHeight(), 1));
+				return icon;
+			} else {
+				buffer = null;
+				label_1.setText("sem foto"); // limpa a imagem
+				return null;
+			}
+		}
+		
+
+	
+	public File selecionarArquivoFoto() {
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagens", "jpg", "gif");
+		chooser.setFileFilter(filter);
+		try {
+			// exibir pasta externa no Windows
+			// chooser.setCurrentDirectory(new File("c:\\"));
+			// exibir pasta interna \fotos
+			chooser.setCurrentDirectory(new File((new File(".").getCanonicalPath() + "\\src\\imagens")));
+		} catch (IOException e) {
+		}
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.showOpenDialog(null);
+		File file = chooser.getSelectedFile();
+		return file;
 	}
 }

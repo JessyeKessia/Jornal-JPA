@@ -29,29 +29,29 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Assunto;
+import modelo.Noticia;
 import regras_negocio.Fachada;
 
-public class TelaCadastrarAssuntos {
+public class TelaAssuntos {
 	private JDialog frame;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JButton button;
 	private JButton button_1;
 	private JLabel label;
-	private JTextField textField;
 	private JLabel lblNovoNome;
 	private JTextField textField_1;
 	private JButton button_2;
-
-	private JLabel lblNome;
 	private JLabel lblSelecioneUmAsssunto;
 	private JButton button_3;
+	private JTextField textField_2;
+	private JLabel lblNoticias;
+	private JTextField textField_3;
 
 	
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastrarAssuntos() {
+	public TelaAssuntos() {
 		initialize();
 	}
 
@@ -63,7 +63,7 @@ public class TelaCadastrarAssuntos {
 		frame.setModal(true);		//janela modal
 		
 		frame.setTitle("Cadastrar Assuntos");
-		frame.setBounds(100, 100, 378, 341);
+		frame.setBounds(100, 100, 396, 395);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.addWindowListener(new WindowAdapter() {
@@ -80,7 +80,7 @@ public class TelaCadastrarAssuntos {
 		frame.setResizable(false);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 44, 315, 152);
+		scrollPane.setBounds(10, 44, 360, 152);
 		frame.getContentPane().add(scrollPane);
 
 		table = new JTable() {
@@ -97,8 +97,11 @@ public class TelaCadastrarAssuntos {
 				try {
 					if (table.getSelectedRow() >= 0) {
 						//pegar o nome selecionado
-						String nome = (String) table.getValueAt( table.getSelectedRow(), 2);
-						textField_1.setText(nome);
+						String nome = (String) table.getValueAt( table.getSelectedRow(), 1);
+						textField_2.setText(nome);
+						label.setText("");
+						String noticias = (String) table.getValueAt( table.getSelectedRow(), 2);
+						textField_3.setText(noticias);
 						label.setText("");
 					}
 				}
@@ -126,11 +129,11 @@ public class TelaCadastrarAssuntos {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(textField_1.getText().isEmpty()) {
-						label.setText("numero vazio");
+					if(textField_2.getText().isEmpty()) {
+						label.setText("sem nome");
 						return;
 					}
-					String nome = textField_1.getText();
+					String nome = textField_2.getText();
 					//confirma��o
 					Object[] options = { "Confirmar", "Cancelar" };
 					int escolha = JOptionPane.showOptionDialog(null, "Confirma exclus�o do assunto "+nome, "Alerta",
@@ -146,47 +149,27 @@ public class TelaCadastrarAssuntos {
 				}
 			}
 		});
-		button_1.setBounds(218, 250, 95, 23);
+		button_1.setBounds(218, 313, 95, 23);
 		frame.getContentPane().add(button_1);
 
 		label = new JLabel("");
 		label.setForeground(Color.RED);
-		label.setBounds(26, 309, 326, 14);
+		label.setBounds(26, 293, 326, 14);
 		frame.getContentPane().add(label);
-
-		button = new JButton("Listar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listagem();
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button.setBounds(229, 10, 112, 23);
-		frame.getContentPane().add(button);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(122, 11, 86, 20);
-		frame.getContentPane().add(textField);
 
 		lblNovoNome = new JLabel("Novo nome:");
 		lblNovoNome.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNovoNome.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNovoNome.setBounds(26, 221, 71, 14);
+		lblNovoNome.setBounds(26, 243, 71, 14);
 		frame.getContentPane().add(lblNovoNome);
 
-		lblNome = new JLabel("Nome do Assunto: ");
-		lblNome.setBounds(26, 15, 123, 14);
-		frame.getContentPane().add(lblNome);
-
-		lblSelecioneUmAsssunto = new JLabel("selecione um asssunto");
+		lblSelecioneUmAsssunto = new JLabel("selecione um assunto");
 		lblSelecioneUmAsssunto.setBounds(26, 194, 336, 14);
 		frame.getContentPane().add(lblSelecioneUmAsssunto);
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(103, 219, 105, 20);
+		textField_1.setBounds(134, 241, 105, 20);
 		frame.getContentPane().add(textField_1);
 
 		button_2 = new JButton("Criar");
@@ -209,11 +192,11 @@ public class TelaCadastrarAssuntos {
 			}
 		});
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button_2.setBounds(26, 250, 77, 23);
+		button_2.setBounds(26, 313, 77, 23);
 		frame.getContentPane().add(button_2);
 
 		button_3 = new JButton("Atualizar");
-		button_3.setToolTipText("alterar o Assunto");
+		button_3.setToolTipText("alterar o nome do Assunto");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -221,7 +204,7 @@ public class TelaCadastrarAssuntos {
 						label.setText("nome vazio");
 						return;
 					}
-					String nome = textField.getText();
+					String nome = textField_2.getText();
 					String nomenovo = textField_1.getText();
 					Fachada.alterarnome(nome, nomenovo);
 					label.setText("assunto atualizado");
@@ -233,24 +216,53 @@ public class TelaCadastrarAssuntos {
 			}
 		});
 		button_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button_3.setBounds(113, 250, 95, 23);
+		button_3.setBounds(113, 313, 95, 23);
 		frame.getContentPane().add(button_3);
+		
+		JLabel lblNovoNome_1 = new JLabel("Nome do Assunto:");
+		lblNovoNome_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNovoNome_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNovoNome_1.setBounds(26, 218, 123, 14);
+		frame.getContentPane().add(lblNovoNome_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(134, 216, 105, 20);
+		frame.getContentPane().add(textField_2);
+		
+		lblNoticias = new JLabel("Noticias:");
+		lblNoticias.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNoticias.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNoticias.setBounds(26, 268, 71, 14);
+		frame.getContentPane().add(lblNoticias);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(134, 266, 197, 20);
+		frame.getContentPane().add(textField_3);
 
 		frame.setVisible(true);
 	}
 
 	public void listagem () {
 		try{
-			List<Assunto> lista = Fachada.consultarAssuntos(textField.getText());
+			List<Assunto> lista = Fachada.consultarAssuntos(textField_2.getText());
 			DefaultTableModel model = new DefaultTableModel();
 			table.setModel(model);
 			
 			model.addColumn("Id");
 			model.addColumn("Nome");
+			model.addColumn("Noticias");
+			
+			String texto1;
 
 			for(Assunto t : lista) {
-				if(t.getNoticias() != null)
-					model.addRow(new Object[]{t.getId(), t.getNome() });
+				if(t.getNoticias() != null){
+					texto1 = "";
+					for (Noticia p: t.getNoticias())
+						texto1 += p.getTitulo() + ", ";
+					model.addRow(new Object[]{t.getId(), t.getNome(), texto1 });
+					}
 				else
 					model.addRow(new Object[]{t.getId(),  t.getNome(),  "desconhecido"});
 			}

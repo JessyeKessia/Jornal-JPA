@@ -1,5 +1,34 @@
-18:58:05,905 TRACE bind:24 - binding parameter (4:VARCHAR) <- [https://economy.com/]
-18:58:05,906 TRACE bind:24 - binding parameter (5:VARCHAR) <- [STOCK EXCHANGE IN THE USA]
-18:58:05,906 TRACE bind:24 - binding parameter (6:INTEGER) <- [4]
-18:58:05,921  INFO Util:58 - ----desconectar banco
-18:58:05,923  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
+21:53:07,762  INFO Util:28 - ----conectar banco - lendo arquivo de propriedades 
+21:53:07,772  INFO Util:33 - sgbd => postgresql
+21:53:07,774  INFO Util:34 - banco => pob
+21:53:07,774  INFO Util:35 - ip => localhost
+21:53:07,775  INFO Util:39 - ----configurando postgresql
+21:53:07,842 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+21:53:08,068  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+21:53:08,153  INFO Version:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+21:53:08,201 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+21:53:08,202  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+21:53:08,548  WARN pooling:81 - HHH10001002: Using built-in connection pool (not intended for production use)
+21:53:08,553  INFO pooling:136 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+21:53:08,553  INFO pooling:158 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/pob]
+21:53:08,553  INFO pooling:167 - HHH10001001: Connection properties: {password=****, user=postgres}
+21:53:08,553  INFO pooling:171 - HHH10001003: Autocommit mode: false
+21:53:08,556  INFO pooling:372 - HHH10001115: Connection pool size: 20 (min=1)
+21:53:10,758  INFO JtaPlatformInitiator:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+21:53:10,799  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5a6730e4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+21:53:10,866 DEBUG SQL:135 - alter table if exists Noticia alter column foto set data type bytea
+21:53:11,317 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0
+21:53:11,416 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+21:53:11,417 TRACE bind:24 - binding parameter (1:INTEGER) <- [1]
+21:53:11,424 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+21:53:11,425 TRACE bind:24 - binding parameter (1:INTEGER) <- [2]
+21:53:11,427 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+21:53:11,427 TRACE bind:24 - binding parameter (1:INTEGER) <- [3]
+21:53:11,430 DEBUG SQL:135 - select a1_0.noticias_id,a1_1.id,a1_1.nome from Assunto_Noticia a1_0 join Assunto a1_1 on a1_1.id=a1_0.assuntos_id where a1_0.noticias_id=?
+21:53:11,430 TRACE bind:24 - binding parameter (1:INTEGER) <- [4]
+21:53:13,167 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+21:53:13,167 TRACE bind:24 - binding parameter (1:VARCHAR) <- [NOVA IA REVOLUCIONA MERCADO]
+21:53:15,397 DEBUG SQL:135 - select n1_0.id,n1_0.comentarios,n1_0.data,n1_0.foto,n1_0.linkWeb,n1_0.titulo from Noticia n1_0 where n1_0.titulo=?
+21:53:15,398 TRACE bind:24 - binding parameter (1:VARCHAR) <- [ELEIÇÕES E OS NOVOS DESAFIOS]
+21:53:19,080  INFO Util:58 - ----desconectar banco
+21:53:19,083  INFO pooling:607 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/pob]
